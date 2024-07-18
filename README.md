@@ -3,6 +3,14 @@
 #### Scope of the repository
 The purpose of this github repository is to enable anyone to test their dispatching rule selection systems in a dynamic job shop simulator.
 
+In this page, the focus goes towards the practical side, more precisely, setting the code, running the models, and processing the results.
+If one desires more in-depth information, it can be found in the working paper or in the presentation.
+[working-paper](drs-for-dfjssp/paper-1.pdf) [slideshow](drs-for-dfjssp/slideshow-1.pdf)
+
+#### Table of Contents
+
+[TOC]
+
 #### Dispatching rule selection system
 In many real-world applications, such as manufacturing settings, uncertain events occur all the time, thus reactive methods are necessary.
 
@@ -26,8 +34,8 @@ The main parameters are the following:
 | :-------------: |:--------------:|:------------:|:---------------:|
 | *M*    | Number of Machines | 20 | 20 |
 | *J* | Number of Jobs | 2500 | 2500 |
-| *O_j* | Number of operations per job | U(2,14) | U(2,14) |
-| *p_jo* | Processing times of operations | U(1,*ptMax*): *ptMax*={50,100} | U(1,*ptMax*): *ptMax*={50,100,200} |
+| *O<sub>j</sub>* | Number of operations per job | U(2,14) | U(2,14) |
+| *p<sub>jo</sub>* | Processing times of operations | U(1,*ptMax*): *ptMax*={50,100} | U(1,*ptMax*): *ptMax*={50,100,200} |
 | *u* | Utilisation level | 0.83, 0.87, 0.93, 0.96 | 0.80, 0.85, 0.90, 0.95, 0.97 |
 | *a* | Allowance factor | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
@@ -45,7 +53,7 @@ These files must be processed in the following manner to compute the tardiness s
 2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
 3. Compute the geometric mean using the normalised values.
 
-#####Reference values, validation
+##### Reference values, validation
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|
@@ -66,7 +74,7 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.96 |5.0 |50 |783862 | | 0.96 |5.0 |100 |1238100 |
 | 0.96 |7.0 |50 |276994 | | 0.96 |7.0 |100 |370385 |
 
-#####Reference values, test
+##### Reference values, test
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|---------------:|:---------------:|:---------------:|:---------------:|---------------:|
@@ -96,4 +104,4 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.97 |6 |50 |671327 | | 0.97 |6 |100 |1020995| | 0.97 |6 |200 |1748243 |
 | 0.97 |8 |50 |252311 | | 0.97 |8 |100 |322718| | 0.97 |8 |200 |506110 |
 
-
+#### Benchmark
