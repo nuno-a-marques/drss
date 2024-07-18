@@ -25,3 +25,42 @@ The main parameters are the following:
 |   | Parameter  | Validation | Test |
 | :-------------: |:--------------:|:------------:|:---------------:|
 | *M*    | Number of Machines | 20 | 20 |
+| *J* | Number of Jobs | 2500 | 2500 |
+| *O_j* | Number of operations per job | U(2,14) | U(2,14) |
+| *p_jo* | Processing times of operations | U(1,*ptMax*): *ptMax*={50,100} | U(1,*ptMax*): *ptMax*={50,100,200} |
+| *u* | Utilisation level | 0.83, 0.87, 0.93, 0.96 | 0.80, 0.85, 0.90, 0.95, 0.97 |
+| *a* | Allowance factor | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
+| nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
+
+#### Configuring the simulator
+
+##### Specific guidelines for periodic rule selection models
+
+##### Specific guidelines for real time rule selection models
+
+#### Computing model performance
+The software will output a file for each *ptMax*.
+These files must be processed in the following manner to compute the tardiness score of each model:
+1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination;
+2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
+3. Compute the geometric mean using the normalised values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
