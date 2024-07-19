@@ -4,7 +4,7 @@
 The purpose of this github repository is to enable anyone to test their dispatching rule selection systems in a dynamic job shop simulator.
 
 In this page, the focus goes towards the practical side, more precisely, setting the code, running the models, and processing the results.
-If one desires more in-depth information, it can be found in the working paper or in the presentation.
+If one desires more in-depth information, it can be found in the [working paper](drss for job shops, w292024.pdf) or in the presentation.
 [working-paper](drs-for-dfjssp/paper-1.pdf) [slideshow](drs-for-dfjssp/slideshow-1.pdf)
 
 ### Table of Contents
