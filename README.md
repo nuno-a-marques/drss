@@ -65,7 +65,7 @@ Models should be named as follows:
 
 The *model_id* wildcard stands for a standardised numeric system that allows to identify diferent models:
 
-PICTURE
+![Alt text](prs-models-coding.png)
 
 In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
 
