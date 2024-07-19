@@ -7,6 +7,8 @@ In this page, the focus goes towards the practical side, more precisely, setting
 If one desires more in-depth information, it can be found in the [working paper](drss%20for%20job%20shops%20w292024.pdf) or in the presentation.
 [working-paper](drs-for-dfjssp/paper-1.pdf) [slideshow](drs-for-dfjssp/slideshow-1.pdf)
 
+drss for job shops w292024.pdf
+
 ### Table of Contents
 
 [TOC]
