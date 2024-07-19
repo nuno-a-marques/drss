@@ -15,8 +15,8 @@ If one desires more in-depth information, it can be found in the [working paper]
     - [Specific guidelines for periodic rule selection models](#specific-guidelines-for-periodic-rule-selection-models)
     - [Specific guidelines for real time rule selection models](#specific-guidelines-for-real-time-rule-selection-models)
 - [Computing model performance](#computing-model-performance)
-    - [Reference values, validation](#reference-values%2C-validation)
-    - [Reference values, test](#reference-values%2C-test)
+    - [Reference values, validation](#reference-values---validation)
+    - [Reference values, test](#reference-values---test)
 - [Benchmark](#benchmark)
 
 ### Dispatching rule selection system
@@ -94,7 +94,7 @@ These files must be processed in the following manner to compute the tardiness s
 2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
 3. Compute the geometric mean using the normalised values.
 
-##### Reference values, validation
+##### Reference values - validation
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|
@@ -115,7 +115,7 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.96 |5.0 |50 |783862 | | 0.96 |5.0 |100 |1238100 |
 | 0.96 |7.0 |50 |276994 | | 0.96 |7.0 |100 |370385 |
 
-##### Reference values, test
+##### Reference values - test
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|---------------:|:---------------:|:---------------:|:---------------:|---------------:|
