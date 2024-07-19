@@ -32,22 +32,27 @@ The main parameters are the following:
 |   | Parameter  | Validation | Test |
 | :-------------: |:--------------:|:------------:|:---------------:|
 | *M*    | Number of Machines | 20 | 20 |
-| *J* | Number of Jobs | 2500 | 2500 |
+| *J* | Number of Jobs<sup>1</sup> | 2500 | 2500 |
 | *O<sub>j</sub>* | Number of operations per job | U(2,14) | U(2,14) |
 | *p<sub>jo</sub>* | Processing times of operations | U(1,*ptMax*): *ptMax*={50,100} | U(1,*ptMax*): *ptMax*={50,100,200} |
-| *u* | Utilisation level | 0.83, 0.87, 0.93, 0.96 | 0.80, 0.85, 0.90, 0.95, 0.97 |
-| *a* | Allowance factor | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
+| *u* | Utilisation level<sup>2</sup> | 0.83, 0.87, 0.93, 0.96 | 0.80, 0.85, 0.90, 0.95, 0.97 |
+| *a* | Allowance factor<sup>2</sup> | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
+
+<sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the war-up phase and thus are exluded from tardiness computation.
+<sup>2</sup> The *utilisation level* and the *allowance factor* have a huge impact in job shop load conditions. The former defines the rate at which jobs arrive. The latter defines the amount of time available to process operations.
 
 ### Configuring the simulator
 The simulator allows to test both PRS and RTRS models.
 
-Models should rely in one of the three state sets:
+Models should rely in one of the three state sets as their input:
 - SS_1: Processing times of pending operations & tardiness of pending jobs;
 - SS_2: Processing times of pending operations & earliness of pending jobs;
 - SS_3: Processing times of pending operations & tardiness of pending jobs & earliness of pending jobs.
 
-And suggest one of the three dispatching rules that belong to the action set:  RR, H2, or S9. Internally, these rules are identified by the codes 18, 214, and 508, respectively.
+The natural logarithm transformation is applied to all variables.
+
+As output, models should suggest one of the three dispatching rules that belong to the action set:  RR, H2, or S9. Internally, these rules are identified by the codes 18, 214, and 508, respectively.
 
 ##### Specific guidelines for periodic rule selection models
 For PRS, the simulator can run Random Forests (RFs), Neural Networks (NNs) and Support Vector Machines (SVMs) for both classification and regression tasks.
@@ -63,9 +68,10 @@ Models should be named as follows:
 - SVM-Class.: *svm&#95;[model_id].joblib*
 - SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].joblib*
 
-The *model_id* wildcard stands for a standardised numeric system that allows to identify diferent models:
+The *model_id* wildcard stands for a 5 digit standardised numeric system that allows to identify diferent models. 
 
 ![Alt text](prs-models-coding.png)
+Only the first, second and four digits impact code execution, the others exist for informative reasons.
 
 In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
 
