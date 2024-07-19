@@ -40,6 +40,7 @@ The main parameters are the following:
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
 
 <sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the war-up phase and thus are exluded from tardiness computation.
+
 <sup>2</sup> The *utilisation level* and the *allowance factor* have a huge impact in job shop load conditions. The former defines the rate at which jobs arrive. The latter defines the amount of time available to process operations.
 
 ### Configuring the simulator
