@@ -8,12 +8,12 @@ If one desires more in-depth information, it can be found in the [working paper]
 
 ### Table of Contents
 
-
 - [Dispatching rule selection system](#dispatching-rule-selection-system)
 - [Dynamic job shop instances](#dynamic-job-shop-instances)
 - [Configuring the simulator](#configuring-the-simulator)
     - [Specific guidelines for periodic rule selection models](#specific-guidelines-for-periodic-rule-selection-models)
     - [Specific guidelines for real time rule selection models](#specific-guidelines-for-real-time-rule-selection-models)
+	- [Download and execution procedure](#download-and-execution-procedure)
 - [Computing model performance](#computing-model-performance)
     - [Reference values - validation](#reference-values---validation)
     - [Reference values - test](#reference-values---test)
@@ -48,7 +48,7 @@ The main parameters are the following:
 | *a* | Allowance factor<sup>2</sup> | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
 
-<sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the war-up phase and thus are exluded from tardiness computation.
+<sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the warm-up phase and thus are exluded from tardiness computation.
 
 <sup>2</sup> The *utilisation level* and the *allowance factor* have a huge impact in job shop load conditions. The former defines the rate at which jobs arrive. The latter defines the amount of time available to process operations.
 
@@ -86,6 +86,21 @@ Only the first, second and four digits impact code execution, the others exist f
 In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
 
 ##### Specific guidelines for real time rule selection models
+
+##### Download and execution procedure
+1. Download the Java source codes files: drss_prs, drss_rtrs;
+2. Include your own models, by copying them to the main folder, the files should follow the previous guidelines, by default the code is set up to run a few example models that go with the source code;
+3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class;
+4. Compile and run the files by adapting the following instructions to your (Linux) machine:
+
+        cd drss_prs/src
+        javac -d . -cp .:/homes/user/drss_prs/lib/* *.java
+        java -Xms756m -Xmx756m -cp .:/homes/user/drss_prs/lib/* App -benchmarkMode 1 -instanceToTest 6 -episodes 100 -windowLimit 9999 -windowInterval 50 -testMode validation
+
+The user can configure the run by altering the *java* instruction:
+- *testMode*, defines the instances and seeds that are going to be used, there are two possible values: *validation* and *test*;
+- *windowInterval*, defines the frequency at which the DR is selected, important for PRS, leave it unchanged in RTRS, the following values are admissable: 50, 100, 200, 400, 800;
+- *instanceToTest*, defines the *ptMax* parameter: 6 → *ptMax*=50; 7 → *ptMax*=100; 8 → *ptMax*=200;
 
 ### Computing model performance
 The software will output a file for each *ptMax*.
@@ -146,3 +161,18 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.97 |8 |50 |252311 | | 0.97 |8 |100 |322718| | 0.97 |8 |200 |506110 |
 
 ### Benchmark
+After running the models and processing the outputed files, it is possible to compare their performance with existing rules and our own DRSS:
+
+| Algorithm | Validation Score | Test Score |
+| :-------------: |--------------:|------------:|
+| RR | 1.146 | 1.219 |
+| H2 | 1.624 | 1.509 |
+| S9 | 1.102 | 1.213 |
+| RF-Class. | 0.995 | 1.060 |
+| RF-Reg. | 0.998 | 1.000 |
+| NN-Class. | 0.989 | 0.997 |
+| NN-Reg. | 1.023 | 1.039 |
+| SVM-Class. | 0.994 | 0.997 |
+| SVM-Reg. | 0.992 | 0.995 |
+| QL | 1.007 | 1.060 |
+| DQL | 0.981 | 1.034 |
