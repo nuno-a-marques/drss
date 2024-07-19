@@ -8,7 +8,18 @@ If one desires more in-depth information, it can be found in the [working paper]
 
 ### Table of Contents
 
-[TOC]
+
+- [Dispatching rule selection system](#dispatching-rule-selection-system)
+- [Dynamic job shop instances](#dynamic-job-shop-instances)
+- [Configuring the simulator](#configuring-the-simulator)
+
+
+Specific guidelines for periodic rule selection models
+Specific guidelines for real time rule selection models
+Computing model performance
+Reference values, validation
+Reference values, test
+
 
 ### Dispatching rule selection system
 In many real-world applications, such as manufacturing settings, uncertain events occur all the time, thus reactive methods are necessary.
