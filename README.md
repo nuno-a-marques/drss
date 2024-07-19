@@ -15,8 +15,8 @@ If one desires more in-depth information, it can be found in the [working paper]
     - [Specific guidelines for periodic rule selection models](#specific-guidelines-for-periodic-rule-selection-models)
     - [Specific guidelines for real time rule selection models](#specific-guidelines-for-real-time-rule-selection-models)
 - [Computing model performance](#computing-model-performance)
-    - [Reference values, validation](#reference-values,-validation)
-    - [Reference values, test](#reference-values,-test)
+    - [Reference values, validation](#reference-values%2C-validation)
+    - [Reference values, test](#reference-values%2C-test)
 - [Benchmark](#benchmark)
 
 ### Dispatching rule selection system
