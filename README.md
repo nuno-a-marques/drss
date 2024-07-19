@@ -1,17 +1,17 @@
 # Dispatching rule selection systems for dynamic jobs shops
 
-#### Scope of the repository
+### Scope of the repository
 The purpose of this github repository is to enable anyone to test their dispatching rule selection systems in a dynamic job shop simulator.
 
 In this page, the focus goes towards the practical side, more precisely, setting the code, running the models, and processing the results.
 If one desires more in-depth information, it can be found in the working paper or in the presentation.
 [working-paper](drs-for-dfjssp/paper-1.pdf) [slideshow](drs-for-dfjssp/slideshow-1.pdf)
 
-#### Table of Contents
+### Table of Contents
 
 [TOC]
 
-#### Dispatching rule selection system
+### Dispatching rule selection system
 In many real-world applications, such as manufacturing settings, uncertain events occur all the time, thus reactive methods are necessary.
 
 In dynamic scheduling, dispatching rules (DRs) such as SPT and FIFO become quite popular as they make scheduling decisions quickly.
@@ -25,7 +25,7 @@ Therefore, dispatching rule selection systems (DRSSs) emerged in the literature.
 | PRS - Periodic Rule Selection    | Select a DR at fixed periods of time &Delta;t; Tackled with Supervised Learning |
 | RTRS - Real time rule selection      | Select a DR every time a machine becomes idle; Tackled with Reinforcement Learning       |
 
-#### Dynamic job shop instances
+### Dynamic job shop instances
 The dynamic job shop is a scheduling problem in which jobs arrive randomly over time to be processed in a pool of machines. Each job has a set of operations that must be processed in a given sequence, and each operation must be processed by a particular machine. In our work the goal is to optimize tardiness, i.e., the time jobs take beyond their due date.
 
 The main parameters are the following:
@@ -40,13 +40,39 @@ The main parameters are the following:
 | *a* | Allowance factor | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
 
-#### Configuring the simulator
+### Configuring the simulator
+The simulator allows to test both PRS and RTRS models.
+
+Models should rely in one of the three state sets:
+- SS_1: Processing times of pending operations & tardiness of pending jobs;
+- SS_2: Processing times of pending operations & earliness of pending jobs;
+- SS_3: Processing times of pending operations & tardiness of pending jobs & earliness of pending jobs.
+
+And suggest one of the three dispatching rules that belong to the action set:  RR, H2, or S9. Internally, these rules are identified by the codes 18, 214, and 508, respectively.
 
 ##### Specific guidelines for periodic rule selection models
+For PRS, the simulator can run Random Forests (RFs), Neural Networks (NNs) and Support Vector Machines (SVMs) for both classification and regression tasks.
+
+The RFs and SVMs were trained using the *scikit* package for Python and exported as a *.joblib* file to be used in Java.
+The neural netoworks were trained using the *keras* package for Python and the weights were exported in a plain .txt file to be used in Java.
+
+Models should be named as follows:
+- RF-Class.: *sl&#95;models&#95;m[model&#95;id].joblib*
+- RF-Reg.: *sl&#95;models&#95;m[model&#95;id]&#95;[dr_id].joblib*
+- NN-Class.: *nn&#95;param&#95;[model&#95;id].txt*
+- NN-Reg.: *nn&#95;param&#95;[model&#95;id].txt*
+- SVM-Class.: *svm&#95;[model_id].joblib*
+- SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].joblib*
+
+The *model_id* wildcard stands for a standardised numeric system that allows to identify diferent models:
+
+PICTURE
+
+In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
 
 ##### Specific guidelines for real time rule selection models
 
-#### Computing model performance
+### Computing model performance
 The software will output a file for each *ptMax*.
 These files must be processed in the following manner to compute the tardiness score of each model:
 1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination;
@@ -104,4 +130,4 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.97 |6 |50 |671327 | | 0.97 |6 |100 |1020995| | 0.97 |6 |200 |1748243 |
 | 0.97 |8 |50 |252311 | | 0.97 |8 |100 |322718| | 0.97 |8 |200 |506110 |
 
-#### Benchmark
+### Benchmark
