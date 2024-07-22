@@ -8,8 +8,6 @@ If one desires more in-depth information, it can be found in the [working paper]
 
 ### Table of Contents
 
-[TOC]
-
 - [Dispatching rule selection system](#dispatching-rule-selection-system)
 - [Dynamic job shop instances](#dynamic-job-shop-instances)
 - [Configuring the simulator](#configuring-the-simulator)
@@ -90,14 +88,20 @@ In regression, it is necessary a model for each DR of the action set, the *dr&#9
 ##### Specific guidelines for real time rule selection models
 
 ##### Download and execution procedure
-1. Download the Java source codes files: [drss-prs](drss-prs.zip), drss_rtrs;
+1. Download the Java source codes files: [drss-prs](drss-prs), drss_rtrs;
 2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models ;
 3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class;
-4. Compile and run the files by adapting the following instructions to your (Linux) machine:
+4. Compile and run the files by adapting the following instructions to your machine:
 
+        ------------------------ LINUX -----------------------
         cd drss_prs/src
         javac -d . -cp .:/homes/user/drss_prs/lib/* *.java
         java -Xms756m -Xmx756m -cp .:/homes/user/drss_prs/lib/* App -benchmarkMode 1 -instanceToTest 6 -episodes 100 -windowLimit 9999 -windowInterval 50 -testMode validation
+		
+		--------------------- WINDOWS ---------------------
+		cd C:\Users\USER_NAME\Downloads\drss_prs\src
+		javac -d . -cp ".;C:\Users\USER_NAME\Downloads\drss-prs\lib\*" *.java
+		java -cp ".;C:\Users\USER_NAME\Downloads\drss-prs\lib\*" App -file "C:\Users\USER_NAME\Downloads\drss-prs\params\parameters.params" -instanceToTest 6 -windowInterval 50 -testMode validation -episodes 100 -windowLimit 9999 -benchmarkMode 1
 
 The user can configure the run by altering the *java* instruction:
 - *testMode*, defines the instances and seeds that are going to be used, there are two possible values: *validation* and *test*;
@@ -105,7 +109,9 @@ The user can configure the run by altering the *java* instruction:
 - *instanceToTest*, defines the *ptMax* parameter: 6 → *ptMax*=50; 7 → *ptMax*=100; 8 → *ptMax*=200;
 
 ### Computing model performance
-The software will output a file for each *ptMax*.
+The software will output a file for each *ptMax*, e.g. *detailedPerformance 200 50 validation i6.txt*, where i6 stands for *ptMax*=50, i7 for *ptMax*=100, and i8 for *ptMax*=200.
+In PRS, results are divided into diferent files acording to training period length, e.g. 200, and decision frequency, e.g. 50.
+
 These files must be processed in the following manner to compute the tardiness score of each model:
 1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination;
 2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
