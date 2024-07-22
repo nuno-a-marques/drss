@@ -8,6 +8,8 @@ If one desires more in-depth information, it can be found in the [working paper]
 
 ### Table of Contents
 
+[TOC]
+
 - [Dispatching rule selection system](#dispatching-rule-selection-system)
 - [Dynamic job shop instances](#dynamic-job-shop-instances)
 - [Configuring the simulator](#configuring-the-simulator)
@@ -67,16 +69,16 @@ As output, models should suggest one of the three dispatching rules that belong 
 ##### Specific guidelines for periodic rule selection models
 For PRS, the simulator can run Random Forests (RFs), Neural Networks (NNs) and Support Vector Machines (SVMs) for both classification and regression tasks.
 
-The RFs and SVMs were trained using the *scikit* package for Python and exported as a *.joblib* file to be used in Java.
+The RFs and SVMs were trained using the *scikit* package for Python and exported as a *.pmml* file to be used in Java.
 The neural netoworks were trained using the *keras* package for Python and the weights were exported in a plain .txt file to be used in Java.
 
 Models should be named as follows:
-- RF-Class.: *sl&#95;models&#95;m[model&#95;id].joblib*
-- RF-Reg.: *sl&#95;models&#95;m[model&#95;id]&#95;[dr_id].joblib*
+- RF-Class.: *sl&#95;models&#95;m[model&#95;id].pmml*
+- RF-Reg.: *sl&#95;models&#95;m[model&#95;id]&#95;[dr_id].pmml*
 - NN-Class.: *nn&#95;param&#95;[model&#95;id].txt*
 - NN-Reg.: *nn&#95;param&#95;[model&#95;id].txt*
-- SVM-Class.: *svm&#95;[model_id].joblib*
-- SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].joblib*
+- SVM-Class.: *svm&#95;[model_id].pmml*
+- SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].pmml*
 
 The *model_id* wildcard stands for a 5 digit standardised numeric system that allows to identify diferent models. 
 
@@ -88,8 +90,8 @@ In regression, it is necessary a model for each DR of the action set, the *dr&#9
 ##### Specific guidelines for real time rule selection models
 
 ##### Download and execution procedure
-1. Download the Java source codes files: drss_prs, drss_rtrs;
-2. Include your own models, by copying them to the main folder, the files should follow the previous guidelines, by default the code is set up to run a few example models that go with the source code;
+1. Download the Java source codes files: [drss-prs](drss-prs), drss_rtrs;
+2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models ;
 3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class;
 4. Compile and run the files by adapting the following instructions to your (Linux) machine:
 
