@@ -64,11 +64,22 @@ The natural logarithm transformation is applied to all variables.
 
 As output, models should suggest one of the three dispatching rules that belong to the action set:  RR, H2, or S9. Internally, these rules are identified by the codes 18, 214, and 508, respectively.
 
-##### Specific guidelines for periodic rule selection models
+#### Specific guidelines for periodic rule selection models
 For PRS, the simulator can run Random Forests (RFs), Neural Networks (NNs) and Support Vector Machines (SVMs) for both classification and regression tasks.
 
 The RFs and SVMs were trained using the *scikit* package for Python and exported as a *.pmml* file to be used in Java.
-The neural netoworks were trained using the *keras* package for Python and the weights were exported in a plain .txt file to be used in Java.
+The neural networks were trained using the *keras* package for Python and the weights were exported in a plain .txt file to be used in Java.
+In order to assure model compatibility, the inputs and outputs of the modes should obey the following naming:
+
+| Algorithm | Input Vars  | Output |  
+| :-------------: |:--------------:|:------------:|
+| RF-Class | processing times of jobs as *x1*, tardiness of jobs as *x2*, and earliness of jobs as *x3* |*rr*, *hunt2*, or *alvaro9* |
+| RF-Reg | processing times of jobs as *var19*, tardiness of jobs as *var24*, and earliness of jobs as *var25* |no naming restriction |
+| NN-Class | no naming restriction |no naming restriction |
+| NN-Reg | no naming restriction |no naming restriction |
+| SVM-class | processing times of jobs as *x1*, tardiness of jobs as *x2*, and earliness of jobs as *x3* |*rr*, *hunt2*, or *alvaro9* |
+| SVM-Reg | processing times of jobs as *var19*, tardiness of jobs as *var24*, and earliness of jobs as *var25* |no naming restriction |
+
 
 Models should be named as follows:
 - RF-Class.: *sl&#95;models&#95;m[model&#95;id].pmml*
@@ -83,9 +94,9 @@ The *model_id* wildcard stands for a 5 digit standardised numeric system that al
 ![Alt text](prs-models-coding.png)
 Only the first, second and four digits impact code execution, the others exist for informative reasons.
 
-In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
+In regression, it is necessary to train a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule (18→rr, 214→hunt2, 508→alvaro9).
 
-##### Specific guidelines for real time rule selection models
+#### Specific guidelines for real time rule selection models
 For RTRS, the code is ready to test QL and DQL models, encoded as look-up tables and neural networks, respectively.
 
 The RTRS models were trained by interacting with the job shop simulator. After training, they were exported as plain .txt files.
@@ -96,7 +107,7 @@ Models should be named as follows:
 
 The* model&#95;id* wildcard as no particular meaning.
 
-##### Download and execution procedure
+#### Download and execution procedure
 1. Download the Java source codes files: [drss-prs](drss-prs.zip), [drss-rtrs](drss-rtrs.zip);
 2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models that are included in the source code ;
 3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class. In RTRS, you should also specify the type of each model in th evariable ssList, e.g., ssList=[ "ql-ss-1", "dql-ss-3",... ];
@@ -128,7 +139,7 @@ These files must be processed in the following manner to compute the tardiness s
 2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
 3. Compute the geometric mean using the normalised values.
 
-##### Reference values - validation
+#### Reference values - validation
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|
@@ -149,7 +160,7 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.96 |5.0 |50 |783862 | | 0.96 |5.0 |100 |1238100 |
 | 0.96 |7.0 |50 |276994 | | 0.96 |7.0 |100 |370385 |
 
-##### Reference values - test
+#### Reference values - test
 
 | u | a  | ptMax |  Reference | | u | a | ptMax | Reference | | u | a | ptMax | Reference |
 | :-------------: |:--------------:|:------------:|---------------:|------------:|:---------------:|:---------------:|:---------------:|---------------:|---------------:|:---------------:|:---------------:|:---------------:|---------------:|
