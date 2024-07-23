@@ -86,11 +86,20 @@ Only the first, second and four digits impact code execution, the others exist f
 In regression, it is necessary a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule.
 
 ##### Specific guidelines for real time rule selection models
+For RTRS, the code is ready to test QL and DQL models, encoded as look-up tables and neural networks, respectively.
+
+The RTRS models were trained by interacting with the job shop simulator. After training, they were exported as plain .txt files.
+
+Models should be named as follows:
+- QL: *q&#95;table&#95;[model&#95;id].txt*;
+- DQL:  *nn&#95;param&#95;[model&#95;id].txt*.
+
+The* model&#95;id* wildcard as no particular meaning.
 
 ##### Download and execution procedure
 1. Download the Java source codes files: [drss-prs](drss-prs.zip), [drss-rtrs](drss-rtrs.zip);
-2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models ;
-3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class;
+2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models that are included in the source code ;
+3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class. In RTRS, you should also specify the type of each model in th evariable ssList, e.g., ssList=[ "ql-ss-1", "dql-ss-3",... ];
 4. Compile and run the files by adapting the following instructions to your machine:
 
         ------------------------ LINUX -----------------------
@@ -107,6 +116,8 @@ The user can configure the run by altering the *java* instruction:
 - *testMode*, defines the instances and seeds that are going to be used, there are two possible values: *validation* and *test*;
 - *windowInterval*, defines the frequency at which the DR is selected, important for PRS, leave it unchanged in RTRS, the following values are admissable: 50, 100, 200, 400, 800;
 - *instanceToTest*, defines the *ptMax* parameter: 6 → *ptMax*=50; 7 → *ptMax*=100; 8 → *ptMax*=200;
+
+These command codes work for both PRS and RTRS models.
 
 ### Computing model performance
 The software will output a file for each *ptMax*, e.g. *detailedPerformance 200 50 validation i6.txt*, where i6 stands for *ptMax*=50, i7 for *ptMax*=100, and i8 for *ptMax*=200.
