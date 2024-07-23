@@ -88,7 +88,7 @@ In regression, it is necessary a model for each DR of the action set, the *dr&#9
 ##### Specific guidelines for real time rule selection models
 
 ##### Download and execution procedure
-1. Download the Java source codes files: [drss-prs](drss-prs), drss_rtrs;
+1. Download the Java source codes files: [drss-prs](drss-prs.zip), [drss-rtrs](drss-rtrs.zip);
 2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models ;
 3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class;
 4. Compile and run the files by adapting the following instructions to your machine:
