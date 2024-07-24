@@ -4,6 +4,8 @@
 The purpose of this github repository is to enable anyone to test their dispatching rule selection systems in a dynamic job shop simulator.
 
 In this page, the focus goes towards the practical side, more precisely, setting the code, running the models, and processing the results.
+Potential problems or doubts that may occur when using the content of this repository, please contact [up201503975@up.pt](mailto:up201503975@up.pt).
+
 If one desires more in-depth information, it can be found in the [working paper](drss%20for%20job%20shops%20w292024.pdf) or in the [presentation](euro2024%20presentation.pdf).
 
 ### Table of Contents
@@ -24,7 +26,7 @@ In many real-world applications, such as manufacturing settings, uncertain event
 
 In dynamic scheduling, dispatching rules (DRs) such as SPT and FIFO become quite popular as they make scheduling decisions quickly.
 
-However, each dispatching rule has preferential operating conditions, some are suitable when the job shop is loaded, others perform better when the job shop is emptier.
+However, each dispacthing rule has preferential operating conditions, some are suitable when the job shop is loaded, others perform better when the job shop is emptier.
 
 Therefore, dispatching rule selection systems (DRSSs) emerged in the literature. Their goal is to select DRs over time as conditions change. Two main types of systems emerged in the literature:
 
@@ -48,7 +50,7 @@ The main parameters are the following:
 | *a* | Allowance factor<sup>2</sup> | 2.5, 3.5, 5, 7 | 2, 3, 4, 6, 8 |
 | nRep | Number of replications for each *u*, *a*, *ptMax* combination | 100 | 100|
 
-<sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the warm-up phase and thus are excluded from tardiness computation.
+<sup>1</sup> Each episode ends when 2500 jobs are processed. However, the first 500 jobs belong to the warm-up phase and thus are exluded from tardiness computation.
 
 <sup>2</sup> The *utilisation level* and the *allowance factor* have a huge impact in job shop load conditions. The former defines the rate at which jobs arrive. The latter defines the amount of time available to process operations.
 
@@ -89,10 +91,10 @@ Models should be named as follows:
 - SVM-Class.: *svm&#95;[model_id].pmml*
 - SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].pmml*
 
-The *model_id* wildcard stands for a 5 digit standardised numeric system that allows to identify different models. 
+The *model_id* wildcard stands for a 5 digit standardised numeric system that allows to identify diferent models. 
 
 ![Alt text](prs-models-coding.png)
-Only the first, second and fourth digits impact code execution, the others exist for informative reasons.
+Only the first, second and four digits impact code execution, the others exist for informative reasons.
 
 In regression, it is necessary to train a model for each DR of the action set, the *dr&#95;id* wildcard identifies the rule (18→rr, 214→hunt2, 508→alvaro9).
 
@@ -105,12 +107,12 @@ Models should be named as follows:
 - QL: *q&#95;table&#95;[model&#95;id].txt*;
 - DQL:  *nn&#95;param&#95;[model&#95;id].txt*.
 
-The *model&#95;id* wildcard as no particular meaning.
+The* model&#95;id* wildcard has no particular meaning.
 
 #### Download and execution procedure
 1. Download the Java source codes files: [drss-prs](drss-prs.zip), [drss-rtrs](drss-rtrs.zip);
-2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models that are included in the source code;
-3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class. In RTRS, you should also specify the type of each model in the variable ssList, e.g., ssList=[ "ql-ss-1", "dql-ss-3",... ];
+2. Include your own models, by copying them to the main folder, the added files should follow the previous guidelines, by default the code is set up to run a few example models that are included in the source code ;
+3. Define the models you want to test, by listing them in the variable nnToTest=[ 32515,... ] of the evaluateRuleRL procedure in the RunSimulator.java class. In RTRS, you should also specify the type of each model in th evariable ssList, e.g., ssList=[ "ql-ss-1", "dql-ss-3",... ];
 4. Compile and run the files by adapting the following instructions to your machine:
 
         ------------------------ LINUX -----------------------
@@ -132,7 +134,7 @@ These command codes work for both PRS and RTRS models.
 
 ### Computing model performance
 The software will output a file for each *ptMax*, e.g. *detailedPerformance 200 50 validation i6.txt*, where i6 stands for *ptMax*=50, i7 for *ptMax*=100, and i8 for *ptMax*=200.
-In PRS, results are divided into different files according to training period length, e.g. 200, and decision frequency, e.g. 50.
+In PRS, results are divided into diferent files acording to training period length, e.g. 200, and decision frequency, e.g. 50.
 
 These files must be processed in the following manner to compute the tardiness score of each model:
 1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination, the script [prs-models-processor](prs-models-processor.py) can help with that;
@@ -191,7 +193,7 @@ These files must be processed in the following manner to compute the tardiness s
 | 0.97 |8 |50 |252311 | | 0.97 |8 |100 |322718| | 0.97 |8 |200 |506110 |
 
 ### Benchmark
-After running the models and processing the outputted files, it is possible to compare their performance with existing rules and our own DRSS:
+After running the models and processing the outputed files, it is possible to compare their performance with existing rules and our own DRSS:
 
 | Algorithm | Validation Score | Test Score |
 | :-------------: |--------------:|------------:|
