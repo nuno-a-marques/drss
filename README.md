@@ -82,6 +82,16 @@ In order to assure model compatibility, the inputs and outputs of the modes shou
 | SVM-class | processing times of jobs as *x1*, tardiness of jobs as *x2*, and earliness of jobs as *x3* |*rr*, *hunt2*, or *alvaro9* |
 | SVM-Reg | processing times of jobs as *var19*, tardiness of jobs as *var24*, and earliness of jobs as *var25* |no naming restriction |
 
+The neural networks for classification have the following structure:
+- Input Layer: 2 neurons for SS_1, SS_2, and 3 neurons for SS_3;
+- Hidden Layers: 3 hidden layers with 4 neurons, the activation function is Sigmoid;
+- Output Layer: 3 neurons, the activation function is Softmax;
+
+The NNs for regression are similar to the NNs for clasification, except in the following:
+- the activation in the hidden layers is ReLu;
+- the final layer has a single neuron, and the activation with the penultimate layer is Linear.
+
+If a different structure is desired, the files *NeuralNetClassFlex.java* and *NeuralNetRegressor.java* must be modified accordingly.
 
 Models should be named as follows:
 - RF-Class.: *sl&#95;models&#95;m[model&#95;id].pmml*
@@ -90,6 +100,8 @@ Models should be named as follows:
 - NN-Reg.: *nn&#95;param&#95;[model&#95;id].txt*
 - SVM-Class.: *svm&#95;[model_id].pmml*
 - SVM-Reg.: *svm&#95;[model&#95;id]&#95;[dr&#95;id].pmml*
+
+The *.txt* file for the NNs are structured as follows: each row starts by the weight number followed by the weight, e.g.: 1, -40.256. The file for the NN-Reg is similar, but the models should come sequencially in the file, first the weights for the *rr* DR, then *hunt2*, then *alvaro9*.
 
 The *model_id* wildcard stands for a 5 digit standardised numeric system that allows to identify diferent models. 
 
@@ -122,7 +134,7 @@ The following snippet shows the first lines of a Q-Table model based on a SS_3 s
 		...
 
 Which obeys the following encoding: Processing time bin, Tardiness bin, Earliness bin, Action (0→*rr*, 1→*hunt2*, 2→*alvaro9*), and the Q-value in the last place.
-If one wants to use other bins, the file *QTable.java* must be altered accordingly.
+If one wants to use other thresholds, the file *QTable.java* must be altered accordingly.
 
 Regarding the neural networks of the DQL models, they should be structured as follows:
  - Input Layer: 2+2 input neurons for SS_1 and SS_2, and 3+2 input neurons for SS_3; the two extra neurons are necessary to encode the action: (0,0)→*rr*, (1,0)→*hunt2*, (0,1)→*alvaro9* ;
