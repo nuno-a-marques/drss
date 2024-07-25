@@ -103,6 +103,35 @@ For RTRS, the code is ready to test QL and DQL models, encoded as look-up tables
 
 The RTRS models were trained by interacting with the job shop simulator. After training, they were exported as plain .txt files.
 
+QL works with discrete state spaces, so it was necessary to discretise the input variables. Each variable was split in the following five bins:
+
+|            | Processing  times |                   |         |  Tardiness |                  |        | Earliness |     |
+| :------: |:-------------------:|:------------:|:-----:|:-----------:|:-----------:|:----:|:----------:|:---:|
+| Bin      | Inf. limit     | Sup. Limit  |         | Inf. limit    | Sup. Limit |       | Inf. limit | Sup. Limit |
+| 0         | 0                | 1096           |         | 0               |  12            |      | 0 |   6633 |
+| 1         | 1096          | 1807          |         | 12             |  180          |      | 6633 |   14764 |
+| 2         | 1807          | 2980          |         | 180           |  2440        |      | 14764 |   32859 |
+| 3         | 2980          | 4914          |         | 2440         |  32859 |           | 32859 |   73129 |
+| 4         | 4914          | &#8734;              |         | 32859     |  &#8734;  |   | 73129 |   &#8734; |
+
+The following snippet shows the first lines of a Q-Table model based on a SS_3 state set, 
+
+		0, 0, 0, 0, -0.320
+		0, 0, 0, 1,  1.780
+		0, 0, 0, 2,  2.238
+		...
+
+Which obeys the following encoding: Processing time bin, Tardiness bin, Earliness bin, Action (0→*rr*, 1→*hunt2*, 2→*alvaro9*), and the Q-value in the last place.
+If one wants to use other bins, the file *QTable.java* must be altered accordingly.
+
+Regarding the neural networks of the DQL models, they should be structured as follows:
+ - Input Layer: 2+2 input neurons for SS_1 and SS_2, and 3+2 input neurons for SS_3; the two extra neurons are necessary to encode the action: (0,0)→*rr*, (1,0)→*hunt2*, (0,1)→*alvaro9* ;
+ - Hidden Layers: 3 hiden layers, their size is equal to the input layer, sigmoid is the activation function;
+ - Output Layer: a single neuron, linearly connected with the penultimate layer;
+
+If a different structure is pretended the *NeuralNet.java* file must be altered accordingly.
+The .txt files of the DQL models are simple, each row should start with the neuron number and then the weigth itself, e.g.: 1,-40.256.
+
 Models should be named as follows:
 - QL: *q&#95;table&#95;[model&#95;id].txt*;
 - DQL:  *nn&#95;param&#95;[model&#95;id].txt*.
