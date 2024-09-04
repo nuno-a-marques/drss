@@ -178,7 +178,7 @@ The software will output a file for each *ptMax*, e.g. *detailedPerformance 200 
 In PRS, results are divided into diferent files acording to training period length, e.g. 200, and decision frequency, e.g. 50.
 
 These files must be processed in the following manner to compute the tardiness score of each model:
-1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination, the script [prs-models-processor](prs-models-processor.py) can help with that;
+1. Compute the average performance of each model for each *ptMax*, *u* and *a* combination, the script [prs-runs-processor](prs-runs-processor.py) can help with that;
 2. Normalise the values computed in the previous step by the respective reference (see tables that follow);
 3. Compute the geometric mean using the normalised values.
 
