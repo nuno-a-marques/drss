@@ -6,7 +6,7 @@ The purpose of this github repository is to enable anyone to test their dispatch
 In this page, the focus goes towards the practical side, more precisely, setting the code, running the models, and processing the results.
 Potential problems or doubts that may occur when using the content of this repository, please contact [up201503975@up.pt](mailto:up201503975@up.pt).
 
-If one desires more in-depth information, it can be found in the [working paper](drss%20for%20job%20shops%20w292024.pdf) or in the [presentation](euro2024%20presentation.pdf).
+If one desires more in-depth information, it can be found in the [paper](https://doi.org/10.1016/j.cie.2025.111471) or in the [presentation](euro2024%20presentation.pdf).
 
 ### Table of Contents
 
